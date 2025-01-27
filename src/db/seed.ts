@@ -1,4 +1,3 @@
-import { db } from './index';
 import { products } from './schema';
 import { sql } from 'drizzle-orm';
 import * as dotenv from 'dotenv';
