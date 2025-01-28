@@ -1,29 +1,39 @@
-import { db } from '@/db';
-import { products } from '@/db/schema';
+import Link from 'next/link';
 
-export const dynamic = 'force-dynamic';
-
-async function getProducts() {
-  return await db.select().from(products);
-}
-
-export default async function Home() {
-  const productList = await getProducts();
-
+export default function Home() {
   return (
-    <main className="p-8">
-      <h1 className="text-2xl font-bold mb-6">Our Products</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {productList.map((product) => (
-          <div key={product.id} className="border rounded-lg p-4 shadow">
-            <h2 className="text-xl font-semibold">{product.name}</h2>
-            <p className="text-gray-600 mt-2">{product.description}</p>
-            <div className="mt-4">
-              <p className="font-bold">${product.price.toString()}</p>
-              <p className="text-sm text-gray-500">In stock: {product.stock}</p>
-            </div>
-          </div>
-        ))}
+    <main className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
+      <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full space-y-6">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+          Real Madrid Quiz
+        </h1>
+        
+        <div className="space-y-4">
+          <Link 
+            href="/game"
+            className="block w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-center transition-colors"
+          >
+            Начать игру
+          </Link>
+
+          <Link 
+            href="/results"
+            className="block w-full py-3 px-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg text-center transition-colors"
+          >
+            Мои результаты
+          </Link>
+
+          <Link 
+            href="/leaderboard"
+            className="block w-full py-3 px-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg text-center transition-colors"
+          >
+            Таблица лидеров
+          </Link>
+        </div>
+
+        <p className="text-sm text-gray-600 text-center mt-8">
+          Проверьте свои знания о Реал Мадриде с 2010 года
+        </p>
       </div>
     </main>
   );
